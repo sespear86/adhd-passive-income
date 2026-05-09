@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sespear86.github.io/adhd-passive-income/sitemap.xml
