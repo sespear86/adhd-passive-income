@@ -6,22 +6,30 @@
   <title>ADHD Passive Income - Autopilot Strategies for Neurodivergents</title>
   <meta name="description" content="ADHD-friendly passive income: AI tools, set-forget biz, automation. Free starter kit inside!">
   <style>
-    :root { --blue: #5A9BD4; --green: #7CB342; --gray: #f8f9fa; --dark: #2c3e50; }
-    body { font-family: 'Segoe UI', Tahoma, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.6; color: var(--dark); background: white; }
+    :root { 
+      --blue: #5A9BD4; --green: #7CB342; --gray: #f8f9fa; --dark: #2c3e50; 
+      --bg: white; --text: var(--dark); --card: var(--gray); --aff: #fff3cd;
+    }
+    [data-theme="dark"] { 
+      --bg: #1a1a1a; --text: #e0e0e0; --card: #2d2d2d; --aff: #3d3d3d;
+      --blue: #74b9ff; --green: #00b894; --dark: #fdcb6e;
+    }
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.6; color: var(--text); background: var(--bg); transition: all 0.3s ease; }
     header { text-align: center; padding: 40px 20px; background: linear-gradient(var(--blue), var(--green)); color: white; border-radius: 10px; margin-bottom: 30px; }
     h1 { margin: 0; font-size: 2.5em; }
     .cta { background: var(--green); color: white; padding: 15px 30px; border: none; border-radius: 5px; font-size: 1.2em; cursor: pointer; margin: 20px 0; text-decoration: none; display: inline-block; }
     .cta:hover { opacity: 0.9; }
     .articles { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-    .card { background: var(--gray); padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s; }
+    .card { background: var(--card); padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.2s; }
     .card:hover { transform: translateY(-5px); }
     .card h3 { margin-top: 0; color: var(--blue); }
-    .testimonials { background: var(--gray); padding: 30px; border-radius: 10px; margin: 30px 0; }
+    .testimonials { background: var(--card); padding: 30px; border-radius: 10px; margin: 30px 0; }
     .testimonial { font-style: italic; margin: 10px 0; }
-    nav { position: sticky; top: 0; background: white; padding: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); z-index: 10; text-align: center; }
+    nav { position: sticky; top: 0; background: var(--bg); padding: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); z-index: 10; text-align: center; }
     nav a { margin: 0 15px; color: var(--blue); }
-    .affiliate { background: #fff3cd; padding: 15px; border-left: 5px solid var(--green); margin: 20px 0; }
-    form { background: var(--gray); padding: 20px; border-radius: 10px; }
+    .toggle { background: none; border: 1px solid var(--blue); color: var(--blue); padding: 5px 10px; border-radius: 20px; cursor: pointer; float: right; }
+    .affiliate { background: var(--aff); padding: 15px; border-left: 5px solid var(--green); margin: 20px 0; }
+    form { background: var(--card); padding: 20px; border-radius: 10px; }
     input, button { width: 100%; padding: 10px; margin: 10px 0; }
     @media (max-width: 768px) { .articles { grid-template-columns: 1fr; } h1 { font-size: 2em; } }
   </style>
@@ -31,6 +39,7 @@
     <a href="#home">Home</a>
     <a href="#articles">Articles</a>
     <a href="#kit">Free Kit</a>
+    <button class="toggle" onclick="toggleDark()">🌙 Dark Mode</button>
   </nav>
   <header id="home">
     <h1>ADHD Passive Income</h1>
@@ -50,7 +59,6 @@
       <h3><a href="articles/automation.html">No-Code Automation Hacks</a></h3>
       <p>Zapier for zero-touch income.</p>
     </div>
-    <!-- Add more cards -->
   </section>
   <section class="testimonials">
     <h2>What Readers Say</h2>
@@ -73,8 +81,19 @@
     <p>&copy; 2026 ADHD Passive Income. AI-built for freedom. LotS family.</p>
   </footer>
   <script>
+    // Dark mode toggle
+    const toggleDark = () => {
+      const theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.body.dataset.theme = theme;
+      localStorage.setItem('theme', theme);
+      document.querySelector('.toggle').textContent = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+    };
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.body.dataset.theme = savedTheme;
+    document.querySelector('.toggle').textContent = savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
     // Sticky nav
-    window.onscroll = () => { document.querySelector('nav').style.background = window.scrollY > 100 ? 'rgba(255,255,255,0.95)' : 'white'; };
+    window.onscroll = () => { document.querySelector('nav').style.background = window.scrollY > 100 ? 'rgba(255,255,255,0.95)' : 'var(--bg)'; };
   </script>
 </body>
 </html>
